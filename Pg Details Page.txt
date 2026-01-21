@@ -1,0 +1,284 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+
+export default function PGDetailsScreen() {
+  const [showMenu, setShowMenu] = useState(false);
+
+  return (
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header Image */}
+        <Image
+          source={{
+            uri: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+          }}
+          style={styles.banner}
+        />
+
+        {/* Header Icons */}
+        <View style={styles.topIcons}>
+          <Text style={styles.icon}>←</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.icon}>♡</Text>
+            <Text style={styles.icon}>⤴</Text>
+          </View>
+        </View>
+
+        {/* Title */}
+        <View style={styles.section}>
+          <Text style={styles.title}>
+            Universal PG <Text style={{ color: "#5b4fff" }}>(Co-Living)</Text>
+          </Text>
+
+          <Text style={styles.desc}>
+            Welcome to HloPG. Universal PG is a well-maintained PG providing
+            comfortable rooms, food, WiFi, and all modern amenities for students
+            and professionals.
+          </Text>
+        </View>
+
+        {/* Sharing Type */}
+        <View style={styles.section}>
+          <Text style={styles.heading}>Select Sharing Type</Text>
+          <View style={styles.row}>
+            {["2 Sharing", "3 Sharing", "4 Sharing", "5 Sharing"].map(
+              (item, i) => (
+                <View key={i} style={styles.chip}>
+                  <Text>{item}</Text>
+                </View>
+              )
+            )}
+          </View>
+        </View>
+
+        {/* Amenities */}
+        <View style={styles.section}>
+          <Text style={styles.heading}>Amenities</Text>
+
+          <View style={styles.amenities}>
+            {[
+              "Free WiFi",
+              "TV",
+              "Bed",
+              "Washing",
+              "Lockers",
+              "Cupboard",
+              "Power Backup",
+              "Lift",
+              "CCTV",
+              "Parking",
+              "Food",
+              "RO Water",
+              "Caretaker",
+            ].map((item, i) => (
+              <View key={i} style={styles.amenityBox}>
+                <Text style={styles.amenityText}>{item}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* PG Rules */}
+        <View style={styles.section}>
+          <Text style={styles.heading}>PG Rules</Text>
+          <Text style={styles.rule}>• No smoking inside rooms</Text>
+          <Text style={styles.rule}>• Visitors allowed till 9 PM</Text>
+          <Text style={styles.rule}>• Maintain cleanliness</Text>
+        </View>
+
+        {/* Food Menu */}
+        <View style={styles.section}>
+          <TouchableOpacity
+            style={styles.menuHeader}
+            onPress={() => setShowMenu(!showMenu)}
+          >
+            <Text style={styles.heading}>Food Menu</Text>
+            <Text>{showMenu ? "▲" : "▼"}</Text>
+          </TouchableOpacity>
+
+          {showMenu && (
+            <Text style={styles.menuText}>
+              Monday to Sunday – Breakfast, Lunch & Dinner available.
+            </Text>
+          )}
+        </View>
+
+        {/* Location */}
+        <View style={styles.section}>
+          <Text style={styles.heading}>PG Location</Text>
+          <View style={styles.map}>
+            <Text style={{ color: "#777" }}>📍 Map Preview</Text>
+          </View>
+        </View>
+
+        {/* Ratings */}
+        <View style={styles.section}>
+          <Text style={styles.heading}>Ratings and Reviews</Text>
+
+          <View style={styles.ratingRow}>
+            <Text style={styles.rating}>⭐⭐⭐⭐⭐</Text>
+            <Text style={styles.ratingText}>4.8 (120 reviews)</Text>
+          </View>
+
+          <View style={styles.reviewBox}>
+            <Text style={styles.reviewUser}>Absolutely lovely stay at this PG</Text>
+            <Text style={styles.reviewText}>
+              The rooms were clean, spacious and staff was helpful.
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+
+      {/* Bottom Button */}
+      <TouchableOpacity style={styles.bookBtn}>
+        <Text style={styles.bookText}>Book Now</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  banner: {
+    width: "100%",
+    height: 220,
+  },
+
+  topIcons: {
+    position: "absolute",
+    top: 40,
+    left: 15,
+    right: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  icon: {
+    backgroundColor: "#fff",
+    padding: 8,
+    borderRadius: 20,
+    marginLeft: 10,
+  },
+
+  section: {
+    padding: 16,
+  },
+
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+
+  desc: {
+    marginTop: 6,
+    color: "#555",
+    lineHeight: 20,
+  },
+
+  heading: {
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+
+  row: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  chip: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+
+  amenities: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  amenityBox: {
+    backgroundColor: "#f4f4ff",
+    padding: 10,
+    borderRadius: 8,
+    margin: 5,
+  },
+
+  amenityText: {
+    fontSize: 12,
+  },
+
+  rule: {
+    color: "#555",
+    marginBottom: 4,
+  },
+
+  menuHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  menuText: {
+    marginTop: 6,
+    color: "#666",
+  },
+
+  map: {
+    height: 150,
+    backgroundColor: "#eee",
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  ratingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  rating: {
+    fontSize: 16,
+  },
+
+  ratingText: {
+    marginLeft: 8,
+    color: "#555",
+  },
+
+  reviewBox: {
+    backgroundColor: "#f6f6ff",
+    padding: 12,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+
+  reviewUser: {
+    fontWeight: "bold",
+  },
+
+  reviewText: {
+    color: "#555",
+    marginTop: 4,
+  },
+
+  bookBtn: {
+    backgroundColor: "#6c47ff",
+    padding: 16,
+    alignItems: "center",
+  },
+
+  bookText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+});
