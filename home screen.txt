@@ -1,0 +1,202 @@
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.appTitle}>Hlo PG</Text>
+          <Text style={styles.location}>Hyderabad ⌄</Text>
+        </View>
+
+        <TouchableOpacity style={styles.profileIcon}>
+          <Text>🔔</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Search Bar */}
+      <View style={styles.searchBar}>
+        <Text style={styles.searchIcon}>🔍</Text>
+        <TextInput
+          placeholder="Search PG / Hostels"
+          style={styles.searchInput}
+        />
+        <Text style={styles.filterIcon}>⚙️</Text>
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Banner */}
+        <Image
+          style={styles.banner}
+          source={{
+            uri: "https://images.unsplash.com/photo-1612832021180-1867562d5d6b",
+          }}
+        />
+
+        {/* Section */}
+        <Text style={styles.sectionTitle}>Madhapur</Text>
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {["Universal PG", "Siva Kumar PG"].map((item, i) => (
+            <View key={i} style={styles.card}>
+              <Image
+                style={styles.cardImage}
+                source={{
+                  uri: "https://images.unsplash.com/photo-1493809842364-78817add7ffb",
+                }}
+              />
+
+              <Text style={styles.cardTitle}>{item}</Text>
+
+              <View style={styles.row}>
+                <Text style={styles.tagWomen}>Women</Text>
+                <Text style={styles.rating}>⭐ 4.5/5</Text>
+              </View>
+
+              <Text style={styles.price}>₹7,000 / Month</Text>
+            </View>
+          ))}
+        </ScrollView>
+
+        {/* Duplicate second section */}
+        <Text style={styles.sectionTitle}>Madhapur</Text>
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {[1, 2].map((i) => (
+            <View key={i} style={styles.card}>
+              <Image
+                style={styles.cardImage}
+                source={{
+                  uri: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+                }}
+              />
+
+              <Text style={styles.cardTitle}>Universal PG</Text>
+
+              <View style={styles.row}>
+                <Text style={styles.tagBoys}>Boys</Text>
+                <Text style={styles.rating}>⭐ 4.5/5</Text>
+              </View>
+
+              <Text style={styles.price}>₹6,000 / Month</Text>
+            </View>
+          ))}
+        </ScrollView>
+      </ScrollView>
+
+      {/* Bottom Tabs */}
+      <View style={styles.bottomBar}>
+        <Text style={styles.tabActive}>🏠</Text>
+        <Text style={styles.tab}>❤️</Text>
+        <Text style={styles.tab}>📩</Text>
+        <Text style={styles.tab}>👤</Text>
+      </View>
+    </View>
+  );
+}
+
+const purple = "#6c47ff";
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#fff" },
+
+  header: {
+    backgroundColor: purple,
+    padding: 18,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: 50,
+  },
+  appTitle: { color: "#fff", fontSize: 22, fontWeight: "bold" },
+  location: { color: "#fff", marginTop: 2 },
+  profileIcon: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 50,
+  },
+
+  searchBar: {
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    marginHorizontal: 15,
+    marginTop: -20,
+    borderRadius: 10,
+    padding: 10,
+    elevation: 4,
+  },
+  searchInput: { flex: 1, marginLeft: 6 },
+  searchIcon: { opacity: 0.6 },
+  filterIcon: { opacity: 0.6 },
+
+  banner: {
+    height: 140,
+    width: "94%",
+    borderRadius: 12,
+    alignSelf: "center",
+    marginVertical: 14,
+  },
+
+  sectionTitle: {
+    marginLeft: 12,
+    fontWeight: "bold",
+    fontSize: 16,
+    marginTop: 10,
+  },
+
+  card: {
+    width: 170,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    margin: 10,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: "#eee",
+  },
+  cardImage: { height: 90, borderRadius: 8 },
+  cardTitle: { marginTop: 6, fontWeight: "bold" },
+
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 4,
+  },
+  tagWomen: {
+    backgroundColor: "#ff6bb5",
+    color: "#fff",
+    paddingHorizontal: 6,
+    borderRadius: 5,
+    marginRight: 8,
+  },
+  tagBoys: {
+    backgroundColor: "#3aa6ff",
+    color: "#fff",
+    paddingHorizontal: 6,
+    borderRadius: 5,
+    marginRight: 8,
+  },
+  rating: { color: "#444" },
+
+  price: { marginTop: 4, fontWeight: "bold" },
+
+  bottomBar: {
+    height: 60,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#000",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  tabActive: { color: "#fff", fontSize: 22 },
+  tab: { color: "#9a9a9a", fontSize: 20 },
+});

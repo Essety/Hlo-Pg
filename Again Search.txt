@@ -1,0 +1,233 @@
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      {/* 🔍 Search Bar */}
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#888" />
+        <TextInput
+          placeholder="Search PG / Hostels"
+          style={styles.searchInput}
+        />
+        <Ionicons name="settings-outline" size={20} color="#555" />
+      </View>
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* 🕘 Recently Searched */}
+        <View style={styles.recentContainer}>
+          <View style={styles.recentHeader}>
+            <Text style={styles.recentTitle}>Recently Searched</Text>
+            <Text style={styles.clearText}>Clear</Text>
+          </View>
+
+          <View style={styles.recentItem}>
+            <MaterialIcons name="location-on" size={18} color="#777" />
+            <View>
+              <Text style={styles.recentName}>Madhapur</Text>
+              <Text style={styles.recentSub}>
+                100 Feet Road, Universe PG, Co-Living
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.recentItem}>
+            <MaterialIcons name="location-on" size={18} color="#777" />
+            <View>
+              <Text style={styles.recentName}>KPHB</Text>
+              <Text style={styles.recentSub}>
+                3 line, Sai ram, Boys Hostel
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* 🏠 PG Cards */}
+        <View style={styles.cardGrid}>
+          {data.map((item, index) => (
+            <View key={index} style={styles.card}>
+              <Image source={{ uri: item.image }} style={styles.cardImage} />
+
+              <View style={styles.cardBody}>
+                <Text style={styles.cardTitle}>{item.name}</Text>
+
+                <View style={styles.row}>
+                  <Text
+                    style={[
+                      styles.tag,
+                      { backgroundColor: item.gender === "Women" ? "#f8c8dc" : "#cce0ff" },
+                    ]}
+                  >
+                    {item.gender}
+                  </Text>
+
+                  <Ionicons name="star" size={14} color="#f5a623" />
+                  <Text style={styles.rating}>{item.rating}</Text>
+                </View>
+
+                <Text style={styles.price}>{item.price}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
+
+      {/* ⬇️ Bottom Tab */}
+      <View style={styles.bottomTab}>
+        <Ionicons name="home" size={24} color="#000" />
+        <Ionicons name="camera" size={24} color="#6a5acd" />
+        <Ionicons name="heart-outline" size={24} color="#000" />
+        <Ionicons name="person-outline" size={24} color="#000" />
+      </View>
+    </View>
+  );
+}
+
+/* 🔹 Dummy Data */
+const data = [
+  {
+    name: "Universal PG (Madhapur)",
+    gender: "Women",
+    rating: "4.5/5",
+    price: "₹8,000 / Month",
+    image:
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+  },
+  {
+    name: "Siva Kumar PG (Madhapur)",
+    gender: "Boys",
+    rating: "4.5/5",
+    price: "₹7,000 / Month",
+    image:
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914",
+  },
+];
+
+/* 🎨 Styles */
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 50,
+  },
+
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f2f2f2",
+    margin: 16,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    height: 45,
+  },
+
+  searchInput: {
+    flex: 1,
+    marginHorizontal: 10,
+  },
+
+  recentContainer: {
+    marginHorizontal: 16,
+    marginBottom: 10,
+  },
+
+  recentHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+
+  recentTitle: {
+    fontWeight: "600",
+  },
+
+  clearText: {
+    color: "orange",
+  },
+
+  recentItem: {
+    flexDirection: "row",
+    marginVertical: 6,
+  },
+
+  recentName: {
+    fontWeight: "500",
+  },
+
+  recentSub: {
+    fontSize: 12,
+    color: "#777",
+  },
+
+  cardGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    padding: 16,
+  },
+
+  card: {
+    width: "48%",
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    marginBottom: 14,
+    elevation: 3,
+  },
+
+  cardImage: {
+    height: 100,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+  },
+
+  cardBody: {
+    padding: 8,
+  },
+
+  cardTitle: {
+    fontSize: 13,
+    fontWeight: "600",
+  },
+
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 4,
+  },
+
+  tag: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 6,
+    fontSize: 10,
+    marginRight: 6,
+  },
+
+  rating: {
+    fontSize: 12,
+    marginLeft: 4,
+  },
+
+  price: {
+    marginTop: 4,
+    fontWeight: "600",
+  },
+
+  bottomTab: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderColor: "#eee",
+  },
+});

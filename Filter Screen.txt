@@ -1,0 +1,217 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import Slider from "@react-native-community/slider";
+import { Ionicons } from "@expo/vector-icons";
+
+export default function FilterScreen() {
+  const [gender, setGender] = useState("Boys");
+  const [price, setPrice] = useState(5000);
+
+  return (
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      {/* 🔍 Search */}
+      <View style={styles.searchBar}>
+        <Ionicons name="search" size={18} color="#777" />
+        <Text style={styles.searchText}>Search PG / Hostels</Text>
+        <Ionicons name="options-outline" size={18} color="#777" />
+      </View>
+
+      {/* 📌 Filter Card */}
+      <View style={styles.filterCard}>
+        {/* Gender */}
+        <Text style={styles.heading}>Gender</Text>
+        <View style={styles.row}>
+          {["Boys", "Women", "Co-Living"].map((item) => (
+            <FilterButton
+              key={item}
+              label={item}
+              active={gender === item}
+              onPress={() => setGender(item)}
+            />
+          ))}
+        </View>
+
+        {/* Occupancy */}
+        <Text style={styles.heading}>Occupancy</Text>
+        <View style={styles.row}>
+          {["2-Sharing", "3-Sharing", "4-Sharing", "5-Sharing"].map((item) => (
+            <SmallTag key={item} label={item} />
+          ))}
+        </View>
+
+        {/* Amenities */}
+        <Text style={styles.heading}>Amenities</Text>
+        <View style={styles.rowWrap}>
+          {[
+            "Air conditioning",
+            "Elevator",
+            "Extra Storage",
+            "Gym",
+            "High speed internet",
+            "Garage",
+            "pet allowed",
+          ].map((item) => (
+            <SmallTag key={item} label={item} />
+          ))}
+        </View>
+
+        {/* Price Range */}
+        <Text style={styles.heading}>Monthly Price Range</Text>
+        <Slider
+          minimumValue={1000}
+          maximumValue={20000}
+          step={500}
+          value={price}
+          onValueChange={setPrice}
+          minimumTrackTintColor="#6a5acd"
+          thumbTintColor="#6a5acd"
+        />
+        <Text style={styles.priceText}>₹ {price}</Text>
+
+        {/* Buttons */}
+        <View style={styles.buttonRow}>
+          <TouchableOpacity style={styles.clearBtn}>
+            <Text>Clear All</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.saveBtn}>
+            <Text style={{ color: "#fff" }}>Save Changes</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
+  );
+}
+
+/* 🔹 Reusable Components */
+const FilterButton = ({ label, active, onPress }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={[styles.filterBtn, active && styles.activeBtn]}
+  >
+    <Text style={[styles.filterText, active && { color: "#fff" }]}>
+      {label}
+    </Text>
+  </TouchableOpacity>
+);
+
+const SmallTag = ({ label }) => (
+  <View style={styles.tag}>
+    <Text style={styles.tagText}>{label}</Text>
+  </View>
+);
+
+/* 🎨 Styles */
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    paddingTop: 40,
+  },
+
+  searchBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    margin: 16,
+    padding: 12,
+    borderRadius: 14,
+    justifyContent: "space-between",
+  },
+
+  searchText: {
+    color: "#888",
+    flex: 1,
+    marginLeft: 10,
+  },
+
+  filterCard: {
+    backgroundColor: "#fff",
+    margin: 16,
+    borderRadius: 16,
+    padding: 16,
+  },
+
+  heading: {
+    fontWeight: "600",
+    marginTop: 12,
+    marginBottom: 6,
+  },
+
+  row: {
+    flexDirection: "row",
+    marginBottom: 6,
+  },
+
+  rowWrap: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  filterBtn: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    marginRight: 8,
+  },
+
+  activeBtn: {
+    backgroundColor: "#6a5acd",
+    borderColor: "#6a5acd",
+  },
+
+  filterText: {
+    fontSize: 12,
+  },
+
+  tag: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    margin: 4,
+  },
+
+  tagText: {
+    fontSize: 11,
+  },
+
+  priceText: {
+    textAlign: "center",
+    fontWeight: "600",
+    marginTop: 4,
+  },
+
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 16,
+  },
+
+  clearBtn: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+
+  saveBtn: {
+    backgroundColor: "#6a5acd",
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+  },
+});
+
+
+

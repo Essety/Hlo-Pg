@@ -1,0 +1,151 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+
+export default function SearchScreen() {
+  const [recentSearches, setRecentSearches] = useState([
+    {
+      title: "Madhapur",
+      subtitle: "100 feet Road, Universe PG, Co-Living",
+    },
+    {
+      title: "KPHB",
+      subtitle: "3 line, Sai ram , Boys Hostel",
+    },
+  ]);
+
+  const clearSearches = () => {
+    setRecentSearches([]);
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* Search Bar */}
+      <View style={styles.searchRow}>
+        <View style={styles.searchBox}>
+          <Text style={styles.searchIcon}>🔍</Text>
+          <TextInput
+            placeholder="Search PG / Hostels"
+            style={styles.searchInput}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.filterBtn}>
+          <Text style={styles.filterIcon}>⚙️</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Recently Searched */}
+      {recentSearches.length > 0 && (
+        <View style={styles.recentCard}>
+          <View style={styles.recentHeader}>
+            <Text style={styles.recentTitle}>Recently Searched</Text>
+            <TouchableOpacity onPress={clearSearches}>
+              <Text style={styles.clearText}>Clear</Text>
+            </TouchableOpacity>
+          </View>
+
+          {recentSearches.map((item, index) => (
+            <View key={index} style={styles.recentItem}>
+              <Text style={styles.building}>🏢</Text>
+              <View>
+                <Text style={styles.place}>{item.title}</Text>
+                <Text style={styles.address}>{item.subtitle}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* Bottom Tab Space */}
+      <View style={styles.bottomSpace} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    padding: 15,
+  },
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  searchBox: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f1f1f1",
+    borderRadius: 30,
+    paddingHorizontal: 15,
+    height: 45,
+  },
+  searchIcon: {
+    fontSize: 16,
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 14,
+  },
+  filterBtn: {
+    marginLeft: 10,
+    backgroundColor: "#f1f1f1",
+    width: 45,
+    height: 45,
+    borderRadius: 22,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  filterIcon: {
+    fontSize: 16,
+  },
+  recentCard: {
+    backgroundColor: "#fff",
+    borderRadius: 14,
+    padding: 15,
+    marginTop: 20,
+    elevation: 3,
+  },
+  recentHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 15,
+  },
+  recentTitle: {
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  clearText: {
+    color: "#ff5722",
+    fontSize: 13,
+  },
+  recentItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 12,
+  },
+  building: {
+    fontSize: 18,
+    marginRight: 10,
+  },
+  place: {
+    fontWeight: "600",
+    fontSize: 14,
+  },
+  address: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 2,
+  },
+  bottomSpace: {
+    height: 80,
+  },
+});
