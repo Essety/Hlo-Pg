@@ -1,0 +1,110 @@
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+
+export default function FavouriteScreen() {
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <Text style={styles.header}>Favourite PG’s List</Text>
+
+      {/* Empty State */}
+      <View style={styles.emptyContainer}>
+        <Image
+          source={{
+            uri: "https://cdn-icons-png.flaticon.com/512/4076/4076500.png",
+          }}
+          style={styles.image}
+        />
+
+        <Text style={styles.emptyText}>No Liked List Found</Text>
+      </View>
+
+      {/* Bottom Navigation */}
+      <View style={styles.bottomBar}>
+        <TouchableOpacity>
+          <Text style={styles.tab}>🏠</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style={styles.tab}>📃</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.activeTab}>
+            <Text style={styles.activeIcon}>❤️</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Text style={styles.tab}>👤</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    justifyContent: "space-between",
+  },
+
+  header: {
+    textAlign: "center",
+    marginTop: 50,
+    fontSize: 16,
+    fontWeight: "600",
+  },
+
+  emptyContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+
+  image: {
+    width: 160,
+    height: 160,
+    resizeMode: "contain",
+  },
+
+  emptyText: {
+    marginTop: 14,
+    color: "#777",
+    fontSize: 14,
+  },
+
+  bottomBar: {
+    height: 65,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#000",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+
+  tab: {
+    color: "#aaa",
+    fontSize: 22,
+  },
+
+  activeTab: {
+    backgroundColor: "#6c47ff",
+    padding: 12,
+    borderRadius: 30,
+    marginBottom: 25,
+  },
+
+  activeIcon: {
+    color: "#fff",
+    fontSize: 18,
+  },
+});
