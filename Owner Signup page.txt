@@ -1,0 +1,228 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+import Checkbox from "expo-checkbox";
+import { Ionicons } from "@expo/vector-icons";
+
+export default function SignupScreen({ navigation }) {
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [agree, setAgree] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
+
+  
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    if (!agree) { const handleSignup = () => {
+    if (!name || !mobile || !email || !password || !confirmPassword) {
+      alert("Please fill all fields");
+      return;
+
+      alert("Please accept Terms & Conditions");
+      return;
+    }
+
+    navigation.replace("Login");
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Owner Sign up</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Full Name"
+        value={name}
+        onChangeText={setName}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Mobile Number"
+        keyboardType="phone-pad"
+        value={mobile}
+        onChangeText={setMobile}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Email Address"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
+
+      {/* Password */}
+      <View style={styles.passwordBox}>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Password"
+          secureTextEntry={!showPass}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity onPress={() => setShowPass(!showPass)}>
+          <Ionicons
+            name={showPass ? "eye" : "eye-off"}
+            size={20}
+            color="#777"
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* Confirm Password */}
+      <View style={styles.passwordBox}>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Confirm Password"
+          secureTextEntry={!showConfirmPass}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+        />
+        <TouchableOpacity
+          onPress={() => setShowConfirmPass(!showConfirmPass)}
+        >
+          <Ionicons
+            name={showConfirmPass ? "eye" : "eye-off"}
+            size={20}
+            color="#777"
+          />
+        </TouchableOpacity>
+      </View>
+
+      {/* TERMS BOX */}
+      <View style={styles.termsBox}>
+        <Text style={styles.termsTitle}>Terms And Conditions</Text>
+        <ScrollView>
+          <Text style={styles.termsText}>
+            Welcome to HloPG. By accessing or using our website, mobile
+            application, or services, you agree to comply with and be bound by
+            the following Terms and Conditions. Please read them carefully.
+            {"\n\n"}
+            Acceptance of Terms{"\n"}
+            By using HloPG, you confirm that you are at least 18 years old (or
+            have parental/guardian consent) and that you agree to these Terms
+            and Conditions, our Privacy Policy, and any future updates.
+          </Text>
+        </ScrollView>
+      </View>
+
+      {/* CHECKBOX */}
+      <View style={styles.checkboxContainer}>
+        <Checkbox value={agree} onValueChange={setAgree} />
+        <Text style={styles.checkboxText}>
+          I agree to the Terms & Conditions
+        </Text>
+      </View>
+
+      {/* SIGN UP */}
+      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+        <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+
+      {/* LOGIN */}
+      <Text style={styles.loginText}>
+        Already have an Account?
+        <Text
+          style={styles.loginLink}
+          onPress={() => navigation.navigate("Login")}
+        >
+          {" "}Login
+        </Text>
+      </Text>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 25,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#8F88FF",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 15,
+  },
+  passwordBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#8F88FF",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    marginBottom: 15,
+  },
+  passwordInput: {
+    flex: 1,
+    paddingVertical: 12,
+  },
+  termsBox: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    height: 140,
+    marginBottom: 15,
+  },
+  termsTitle: {
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  termsText: {
+    fontSize: 12,
+    color: "#555",
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  checkboxText: {
+    marginLeft: 8,
+    color: "#555",
+  },
+  button: {
+    backgroundColor: "#6C63FF",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  loginText: {
+    textAlign: "center",
+    marginTop: 20,
+    color: "#777",
+  },
+  loginLink: {
+    color: "#6C63FF",
+    fontWeight: "600",
+  },
+});
